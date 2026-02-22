@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nibbly — Pet Services Bahrain</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   CSS VARIABLES & RESET
+=========================== */
+:root {
+  --paige: #F2EDF8;
+  --paige-mid: #E4D9F5;
+  --paige-deep: #C9B8E8;
+  --purple: #6B3FA0;
+  --purple-light: #8B5FC4;
+  --purple-dark: #3D1A72;
+  --blue: #3A7BD5;
+  --blue-light: #5A9AEE;
+  --blue-dark: #1A4E9A;
+  --dark: #0F0A1E;
+  --dark2: #1C1433;
+  --text: #2A1F4A;
+  --text-muted: #6B5E8A;
+  --white: #FFFFFF;
+  --gradient: linear-gradient(135deg, #6B3FA0, #3A7BD5);
+  --gradient-soft: linear-gradient(135deg, #E8DEFF, #D0E8FF);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paige);
+  color: var(--text);
+  overflow-x: hidden;
+}
+body.rtl { direction: rtl; font-family: 'Noto Kufi Arabic', sans-serif; }
+body.rtl .logo-text { font-family: 'Noto Kufi Arabic', sans-serif; }
+
+/* ===========================
+   PAGES SYSTEM
+=========================== */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ===========================
+   TOP NAV
+=========================== */
+.topnav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  background: rgba(15,10,30,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(107,63,160,0.3);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 0.2rem;
+  list-style: none;
+  flex-wrap: nowrap;
+}
+
+.nav-links a, .nav-links button {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem; font-weight: 500;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+body.rtl .nav-links a, body.rtl .nav-links button { font-family: 'Noto Kufi Arabic', sans-serif; }
+
+.nav-links a:hover, .nav-links button:hover {
+  color: white; background: rgba(255,255,255,0.08);
+}
+
+.nav-right {
+  display: flex; align-items: center; gap: 0.6rem;
+}
+
+.lang-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white; cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem; font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.lang-btn:hover { background: rgba(255,255,255,0.15); }
+
+.cart-btn {
+  background: rgba(255,255,255,0.08);
+  border: none; cursor: pointer;
+  color: white;
+  width: 38px; height: 38px;
+  border-radius: 50%; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; position: relative;
+}
+.cart-btn:hover { background: rgba(107,63,160,0.4); }
+.cart-count {
+  position: absolute; top:-4px; right:-4px;
+  background: var(--blue); color: white;
+  width: 16px; height: 16px; border-radius: 50%;
+  font-size: 0.6rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.login-btn {
+  background: var(--gradient);
+  color: white; border: none; cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.8rem; font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s; white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(107,63,160,0.4);
+}
+.login-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(107,63,160,0.5); }
+
+/* ===========================
+   HERO / MAIN PAGE
+=========================== */
+#page-main {
+  background: var(--dark);
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 100px 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset:0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(107,63,160,0.3) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(58,123,213,0.25) 0%, transparent 50%),
+              radial-gradient(ellipse at 60% 80%, rgba(107,63,160,0.15) 0%, transparent 40%);
+}
+
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; max-width: 1200px; margin: 0 auto;
+  position: relative; z-index:2; width:100%;
+}
+
+.hero-left { display: flex; flex-direction: column; justify-content: center; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(107,63,160,0.2);
+  border: 1px solid rgba(107,63,160,0.4);
+  color: var(--paige-deep);
+  font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 0.4rem 1rem; border-radius: 50px;
+  width: fit-content; margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 900; line-height: 1.1;
+  color: white; margin-bottom: 1.2rem;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.hero h1 em { font-style:italic; background: var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+.hero p {
+  color: rgba(255,255,255,0.65);
+  font-size: 1rem; line-height: 1.8;
+  max-width: 460px; margin-bottom: 2rem;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: white; padding: 0.85rem 2rem;
+  border-radius: 50px; text-decoration: none;
+  font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(107,63,160,0.4);
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,63,160,0.5); }
+
+.btn-outline {
+  border: 2px solid rgba(107,63,160,0.6);
+  color: rgba(255,255,255,0.85); padding: 0.85rem 2rem;
+  border-radius: 50px; text-decoration: none;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  background: none; font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--purple-light); background: rgba(107,63,160,0.1); }
+
+.hero-right {
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+
+.hero-img-wrap {
+  width: 420px; height: 480px;
+  border-radius: 30px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  position: relative;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+.hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+
+.float-card {
+  position: absolute;
+  background: rgba(20,15,40,0.9);
+  border: 1px solid rgba(107,63,160,0.3);
+  backdrop-filter: blur(16px);
+  border-radius: 18px; padding: 1rem 1.3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.float-card.fc1 { bottom: 2rem; left: -2rem; animation: slideIn 1s 0.5s ease both; }
+.float-card.fc2 { top: 2rem; right: -2rem; animation: slideDown 1s 0.4s ease both; }
+
+.float-card .label { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-bottom: 0.2rem; }
+.float-card .value { font-size: 1.4rem; font-weight: 700; color: white; font-family: 'Playfair Display', serif; }
+.float-card .sub { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+.float-card .price-highlight { color: var(--blue-light); }
+
+/* HIRING BANNER */
+.hiring-banner {
+  background: linear-gradient(90deg, var(--purple-dark), var(--blue-dark));
+  color: white; text-align: center;
+  padding: 0.8rem 2rem;
+  font-size: 0.85rem;
+  position: relative;
+  border-top: 1px solid rgba(107,63,160,0.3);
+}
+.hiring-banner a {
+  color: var(--paige-deep);
+  font-weight: 700; text-decoration: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+.hiring-banner a:hover { color: white; }
+
+/* ===========================
+   SECTION COMMONS
+=========================== */
+.section { padding: 6rem 3rem; }
+.section-dark { background: var(--dark2); }
+.section-mid { background: var(--dark); }
+.section-light { background: var(--paige); }
+.section-paige { background: var(--paige-mid); }
+
+.section-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px;
+  font-weight: 700; color: var(--blue-light); margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 900; line-height: 1.15; margin-bottom: 1rem;
+}
+.section-title.light { color: white; }
+.section-title.dark { color: var(--dark); }
+.section-title em { font-style:italic; background: var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+.section-sub {
+  max-width: 520px; line-height: 1.8; margin-bottom: 3rem; opacity: 0.7;
+}
+.section-sub.light { color: rgba(255,255,255,0.65); }
+.section-sub.dark { color: var(--text-muted); }
+
+.centered { text-align: center; margin-left:auto; margin-right:auto; }
+.max-w { max-width: 1200px; margin: 0 auto; }
+
+/* ===========================
+   NETFLIX-STYLE PET PROFILES
+=========================== */
+.profiles-section {
+  background: var(--dark);
+  padding: 5rem 3rem;
+  text-align: center;
+}
+
+.profiles-row {
+  display: flex; gap: 1.5rem;
+  justify-content: center; flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.profile-bubble {
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  cursor: pointer; transition: all 0.3s;
+}
+
+.profile-bubble:hover { transform: translateY(-6px); }
+
+.profile-ring {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  padding: 3px;
+  background: var(--gradient);
+  transition: all 0.3s;
+}
+.profile-bubble:hover .profile-ring { box-shadow: 0 0 20px rgba(107,63,160,0.7); }
+
+.profile-inner {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: var(--dark2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; overflow: hidden;
+  border: 2px solid var(--dark);
+}
+
+.profile-inner img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+.profile-name { font-size: 0.78rem; color: rgba(255,255,255,0.8); font-weight: 500; }
+
+.add-profile {
+  width: 90px; height: 90px; border-radius: 50%;
+  border: 2px dashed rgba(107,63,160,0.5);
+  background: rgba(107,63,160,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; color: rgba(107,63,160,0.7);
+  cursor: pointer; transition: all 0.3s;
+}
+.add-profile:hover { border-color: var(--purple-light); color: var(--purple-light); background: rgba(107,63,160,0.15); }
+
+/* ===========================
+   SERVICES GRID
+=========================== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.svc-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(107,63,160,0.18);
+  border-radius: 22px; padding: 2rem 1.6rem;
+  transition: all 0.3s; cursor: default;
+}
+.svc-card:hover {
+  background: rgba(107,63,160,0.1);
+  border-color: rgba(107,63,160,0.4);
+  transform: translateY(-5px);
+}
+.svc-card.highlight { background: var(--gradient); border-color: transparent; }
+.svc-card.highlight p { color: rgba(255,255,255,0.8); }
+
+.svc-icon { font-size: 2.2rem; margin-bottom: 1.2rem; display: block; }
+.svc-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; margin-bottom: 0.6rem; }
+.svc-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+/* ===========================
+   GROOMING PACKAGES
+=========================== */
+.grooming-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem;
+}
+
+.groom-card {
+  border-radius: 22px; padding: 2rem 1.6rem;
+  border: 1px solid rgba(58,123,213,0.2);
+  background: rgba(58,123,213,0.05);
+  transition: all 0.3s;
+}
+.groom-card:hover { border-color: rgba(58,123,213,0.5); transform: translateY(-4px); }
+.groom-card.best { background: linear-gradient(135deg, rgba(107,63,160,0.3), rgba(58,123,213,0.3)); border-color: rgba(107,63,160,0.5); }
+
+.groom-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.groom-card h3 { font-family: 'Playfair Display', serif; color: white; font-size: 1.2rem; margin-bottom: 0.5rem; }
+.groom-card .groom-badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--blue-light); margin-bottom: 1rem; display: block; }
+.groom-features { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem; }
+.groom-features li { font-size: 0.83rem; color: rgba(255,255,255,0.65); display:flex; align-items:center; gap:0.6rem; }
+.groom-features li::before { content:'✓'; color: var(--blue-light); font-weight:700; }
+.groom-card.best .groom-features li::before { color: var(--paige-deep); }
+
+/* ===========================
+   SUBSCRIPTION / PLANS
+=========================== */
+.plans-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:1.5rem; max-width:700px; margin:0 auto; }
+
+.plan-card {
+  border-radius: 24px; padding: 2.2rem 2rem;
+  border: 1px solid rgba(107,63,160,0.2);
+  background: rgba(255,255,255,0.03);
+  position: relative; transition: all 0.3s;
+}
+.plan-card:hover { border-color: rgba(107,63,160,0.4); transform: translateY(-4px); }
+.plan-card.popular { background: var(--gradient); border-color: transparent; }
+.popular-tag {
+  position:absolute; top:-1rem; left:50%; transform:translateX(-50%);
+  background: var(--blue-dark); color:white;
+  font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1px;
+  padding:0.25rem 1rem; border-radius:50px; white-space:nowrap;
+}
+.plan-card h3 { font-family:'Playfair Display',serif; color:white; font-size:1.3rem; margin-bottom:0.3rem; }
+.plan-card .plan-price { font-family:'Playfair Display',serif; font-size:2.6rem; font-weight:900; color:white; line-height:1; margin:0.8rem 0; }
+.plan-card .plan-price sup { font-size:1rem; }
+.plan-card .plan-price span { font-size:0.85rem; font-weight:300; opacity:0.7; }
+.plan-card p { font-size:0.82rem; color:rgba(255,255,255,0.55); margin-bottom:1.2rem; }
+.plan-card.popular p { color:rgba(255,255,255,0.8); }
+.plan-features { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.8rem; }
+.plan-features li { font-size:0.83rem; color:rgba(255,255,255,0.7); display:flex; align-items:flex-start; gap:0.6rem; line-height:1.5; }
+.plan-features li::before { content:'✓'; color:var(--paige-deep); font-weight:700; flex-shrink:0; margin-top:1px; }
+.plan-card.popular .plan-features li { color:rgba(255,255,255,0.9); }
+.plan-card.popular .plan-features li::before { color:white; }
+.plan-btn {
+  display:block; width:100%; text-align:center;
+  padding:0.8rem; border-radius:50px; border:2px solid rgba(255,255,255,0.25);
+  color:white; font-weight:600; font-size:0.88rem;
+  cursor:pointer; font-family:'DM Sans',sans-serif; background:none;
+  text-decoration:none; transition:all 0.2s;
+}
+.plan-btn:hover { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.5); }
+.plan-card.popular .plan-btn { background:rgba(255,255,255,0.2); border-color:white; }
+.plan-card.popular .plan-btn:hover { background:rgba(255,255,255,0.3); }
+
+.no-sub-note {
+  text-align:center; margin-top:2rem;
+  color:rgba(255,255,255,0.45); font-size:0.85rem; line-height:1.7;
+}
+
+/* ===========================
+   FOOD DELIVERY SECTION
+=========================== */
+.delivery-steps {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;
+}
+.d-step {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(107,63,160,0.15);
+  border-radius:18px; padding:1.8rem 1.4rem;
+  position:relative; overflow:hidden;
+}
+.d-step::before {
+  content:attr(data-n);
+  position:absolute; top:-0.5rem; right:0.8rem;
+  font-family:'Playfair Display',serif;
+  font-size:4rem; font-weight:900;
+  color:rgba(107,63,160,0.1); line-height:1;
+}
+.d-step .d-icon { font-size:1.8rem; margin-bottom:1rem; display:block; }
+.d-step h4 { color:white; font-size:0.95rem; font-weight:600; margin-bottom:0.4rem; }
+.d-step p { color:rgba(255,255,255,0.5); font-size:0.8rem; line-height:1.6; }
+
+/* ===========================
+   LOST PET & ADOPTION
+=========================== */
+#page-lost { background: var(--dark); padding-top:64px; }
+#page-adopt { background: var(--dark); padding-top:64px; }
+
+.page-header {
+  background: linear-gradient(135deg, rgba(107,63,160,0.4), rgba(58,123,213,0.3));
+  border-bottom:1px solid rgba(107,63,160,0.2);
+  padding: 3rem 3rem 2rem;
+  text-align:center;
+}
+.page-header h1 { font-family:'Playfair Display',serif; color:white; font-size:2.5rem; margin-bottom:0.5rem; }
+.page-header p { color:rgba(255,255,255,0.6); max-width:500px; margin:0 auto; }
+
+.big-action-btns {
+  display:flex; gap:1.5rem; justify-content:center; padding:2.5rem;
+  flex-wrap:wrap;
+}
+
+.big-action-btn {
+  display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+  background: var(--gradient);
+  color:white; border:none; cursor:pointer; border-radius:20px;
+  padding:2rem 3rem;
+  font-family:'DM Sans',sans-serif;
+  transition:all 0.3s;
+  box-shadow:0 10px 30px rgba(107,63,160,0.4);
+  text-decoration:none;
+}
+.big-action-btn:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(107,63,160,0.5); }
+.big-action-btn.outline { background:none; border:2px solid rgba(107,63,160,0.5); box-shadow:none; }
+.big-action-btn.outline:hover { background:rgba(107,63,160,0.1); border-color:var(--purple-light); }
+.big-action-btn .btn-icon { font-size:2.5rem; }
+.big-action-btn .btn-label { font-size:1rem; font-weight:700; }
+.big-action-btn .btn-sub { font-size:0.75rem; opacity:0.75; }
+
+.insta-feed-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1rem; padding:0 3rem 3rem;
+}
+
+.insta-card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(107,63,160,0.2);
+  border-radius:16px; overflow:hidden;
+  transition:all 0.3s; cursor:pointer;
+}
+.insta-card:hover { transform:scale(1.02); border-color:rgba(107,63,160,0.5); }
+
+.insta-img {
+  height:160px; background:rgba(107,63,160,0.15);
+  display:flex; align-items:center; justify-content:center;
+  font-size:3.5rem;
+}
+
+.insta-info { padding:1rem; }
+.insta-info h4 { color:white; font-size:0.9rem; font-weight:600; margin-bottom:0.3rem; }
+.insta-info .area { font-size:0.75rem; color:var(--blue-light); margin-bottom:0.4rem; }
+.insta-info .contact { font-size:0.75rem; color:rgba(255,255,255,0.5); }
+.insta-info .status-badge {
+  display:inline-block; margin-top:0.5rem;
+  padding:0.2rem 0.7rem; border-radius:50px; font-size:0.7rem; font-weight:700;
+}
+.status-lost { background:rgba(220,80,80,0.2); color:#ff9090; border:1px solid rgba(220,80,80,0.3); }
+.status-found { background:rgba(80,180,80,0.2); color:#90d890; border:1px solid rgba(80,180,80,0.3); }
+.status-adopt { background:rgba(58,123,213,0.2); color:var(--blue-light); border:1px solid rgba(58,123,213,0.3); }
+
+.bspca-note {
+  margin:0 3rem 2rem; padding:1.2rem 1.8rem;
+  background:rgba(58,123,213,0.1); border:1px solid rgba(58,123,213,0.25);
+  border-radius:14px; font-size:0.85rem; color:rgba(255,255,255,0.65);
+  display:flex; align-items:center; gap:0.8rem;
+}
+.bspca-note a { color:var(--blue-light); }
+
+/* ===========================
+   ABOUT US
+=========================== */
+#page-about { background:var(--dark); padding-top:64px; }
+
+.about-hero {
+  background: linear-gradient(135deg, rgba(107,63,160,0.3), rgba(58,123,213,0.2));
+  padding:5rem 3rem; text-align:center;
+}
+
+.team-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.2rem; padding:3rem; max-width:1200px; margin:0 auto;
+}
+
+.team-card {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(107,63,160,0.18);
+  border-radius:18px; padding:1.8rem 1.2rem;
+  text-align:center; transition:all 0.3s;
+}
+.team-card:hover { border-color:rgba(107,63,160,0.4); transform:translateY(-4px); }
+.team-avatar { width:64px; height:64px; border-radius:50%; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 1rem; }
+.team-card h4 { color:white; font-weight:600; margin-bottom:0.3rem; }
+.team-card span { font-size:0.78rem; color:var(--blue-light); }
+
+/* ===========================
+   HIRING PAGE
+=========================== */
+#page-hiring { background:var(--dark); padding-top:64px; }
+
+.jobs-list { padding:3rem; max-width:900px; margin:0 auto; }
+.job-card {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(107,63,160,0.2);
+  border-radius:16px; padding:1.8rem 2rem;
+  margin-bottom:1rem; display:flex;
+  align-items:center; justify-content:space-between;
+  gap:1rem; transition:all 0.3s; flex-wrap:wrap;
+}
+.job-card:hover { border-color:rgba(107,63,160,0.4); background:rgba(107,63,160,0.08); }
+.job-info h3 { color:white; font-weight:600; margin-bottom:0.3rem; }
+.job-info span { font-size:0.8rem; color:var(--blue-light); }
+.job-type { font-size:0.75rem; background:rgba(107,63,160,0.2); color:var(--paige-deep); padding:0.3rem 0.8rem; border-radius:50px; }
+.apply-btn { background:var(--gradient); color:white; border:none; cursor:pointer; padding:0.6rem 1.5rem; border-radius:50px; font-weight:600; font-size:0.85rem; font-family:'DM Sans',sans-serif; transition:all 0.2s; }
+.apply-btn:hover { transform:translateY(-2px); }
+
+/* ===========================
+   CONTACT PAGE
+=========================== */
+#page-contact { background:var(--paige); padding-top:64px; }
+
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; max-width:900px; margin:0 auto; padding:3rem; }
+
+.contact-form-box {
+  background:white; border-radius:24px; padding:2.5rem;
+  box-shadow:0 20px 60px rgba(107,63,160,0.1);
+}
+
+.form-group { margin-bottom:1.2rem; }
+.form-group label { display:block; font-size:0.78rem; font-weight:600; color:var(--text); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.4rem; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:0.8rem 1rem;
+  border:2px solid rgba(107,63,160,0.15);
+  border-radius:12px; font-family:'DM Sans',sans-serif;
+  font-size:0.88rem; color:var(--text); background:var(--paige);
+  transition:border-color 0.2s; outline:none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--purple); }
+.form-group textarea { resize:vertical; min-height:100px; }
+
+.contact-info { display:flex; flex-direction:column; gap:1.5rem; }
+.ci-item { display:flex; gap:1rem; align-items:flex-start; }
+.ci-icon { width:44px; height:44px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+.ci-text h4 { font-weight:600; color:var(--text); margin-bottom:0.2rem; }
+.ci-text p { font-size:0.85rem; color:var(--text-muted); line-height:1.6; }
+
+/* ===========================
+   SIGN IN / SIGN UP PAGES
+=========================== */
+#page-signin, #page-signup { 
+  background:var(--dark); min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:80px 2rem 2rem;
+}
+
+.auth-box {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(107,63,160,0.25);
+  border-radius:28px; padding:2.8rem;
+  width:100%; max-width:440px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 30px 80px rgba(0,0,0,0.4);
+}
+
+.auth-logo { text-align:center; margin-bottom:1.5rem; }
+.auth-logo div { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.auth-logo p { font-size:0.83rem; color:rgba(255,255,255,0.5); margin-top:0.3rem; }
+
+.auth-box h2 { font-family:'Playfair Display',serif; color:white; font-size:1.6rem; text-align:center; margin-bottom:0.4rem; }
+.auth-box .auth-sub { text-align:center; color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:1.8rem; }
+
+.auth-form .form-group label { color:rgba(255,255,255,0.7); }
+.auth-form .form-group input, .auth-form .form-group select {
+  background:rgba(255,255,255,0.07); border-color:rgba(107,63,160,0.25); color:white;
+}
+.auth-form .form-group input::placeholder { color:rgba(255,255,255,0.3); }
+.auth-form .form-group input:focus { border-color:var(--purple-light); background:rgba(255,255,255,0.1); }
+
+.auth-submit {
+  width:100%; padding:0.9rem; background:var(--gradient);
+  border:none; border-radius:50px; color:white;
+  font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700;
+  cursor:pointer; transition:all 0.2s; margin-top:0.5rem;
+  box-shadow:0 6px 20px rgba(107,63,160,0.4);
+}
+.auth-submit:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(107,63,160,0.5); }
+
+.auth-switch { text-align:center; margin-top:1.5rem; font-size:0.85rem; color:rgba(255,255,255,0.5); }
+.auth-switch a { color:var(--paige-deep); text-decoration:none; font-weight:600; cursor:pointer; }
+.auth-switch a:hover { color:white; }
+
+.auth-divider { text-align:center; margin:1.2rem 0; color:rgba(255,255,255,0.3); font-size:0.8rem; position:relative; }
+.auth-divider::before, .auth-divider::after {
+  content:''; position:absolute; top:50%; width:38%; height:1px; background:rgba(255,255,255,0.1);
+}
+.auth-divider::before { left:0; }
+.auth-divider::after { right:0; }
+
+/* ===========================
+   PET PROFILE MODAL / FORM
+=========================== */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:2000;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(8px);
+  align-items:center; justify-content:center;
+  padding:1rem;
+}
+.modal-overlay.open { display:flex; }
+
+.modal {
+  background:var(--dark2);
+  border:1px solid rgba(107,63,160,0.3);
+  border-radius:28px; padding:2.5rem;
+  width:100%; max-width:540px; max-height:90vh; overflow-y:auto;
+  box-shadow:0 30px 80px rgba(0,0,0,0.6);
+  animation:fadeUp 0.3s ease;
+}
+.modal h2 { font-family:'Playfair Display',serif; color:white; font-size:1.5rem; margin-bottom:0.4rem; }
+.modal .modal-sub { color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:1.8rem; }
+.modal-close { float:right; background:none; border:none; color:rgba(255,255,255,0.5); font-size:1.3rem; cursor:pointer; margin-top:-4px; }
+.modal-close:hover { color:white; }
+
+.icon-picker { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.2rem; }
+.icon-opt {
+  width:48px; height:48px; border-radius:12px;
+  background:rgba(255,255,255,0.06); border:2px solid transparent;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem; cursor:pointer; transition:all 0.2s;
+}
+.icon-opt:hover { border-color:var(--purple-light); background:rgba(107,63,160,0.15); }
+.icon-opt.selected { border-color:var(--purple); background:rgba(107,63,160,0.25); }
+
+.upload-photo-btn {
+  display:flex; align-items:center; gap:0.7rem;
+  background:rgba(107,63,160,0.12); border:1px dashed rgba(107,63,160,0.4);
+  border-radius:12px; padding:0.7rem 1rem; cursor:pointer;
+  color:rgba(255,255,255,0.6); font-size:0.85rem; transition:all 0.2s;
+}
+.upload-photo-btn:hover { border-color:var(--purple-light); color:white; }
+
+.modal-form .form-group label { color:rgba(255,255,255,0.7); }
+.modal-form .form-group input, .modal-form .form-group select, .modal-form .form-group textarea {
+  background:rgba(255,255,255,0.06); border-color:rgba(107,63,160,0.2); color:white;
+}
+.modal-form .form-group input::placeholder, .modal-form .form-group textarea::placeholder { color:rgba(255,255,255,0.3); }
+.modal-form .form-group input:focus, .modal-form .form-group select:focus, .modal-form .form-group textarea:focus { border-color:var(--purple-light); }
+.modal-form .form-group select option { background:var(--dark2); }
+
+.modal-form .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+
+.modal-save { margin-top:1.5rem; }
+
+/* ===========================
+   REPORT LOST PET MODAL
+=========================== */
+/* inherits modal styles */
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background:var(--dark);
+  border-top:1px solid rgba(107,63,160,0.2);
+  padding:3rem;
+  text-align:center;
+}
+.footer-logo { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1rem; }
+.footer-links { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem; }
+.footer-links a { color:rgba(255,255,255,0.45); text-decoration:none; font-size:0.82rem; transition:color 0.2s; cursor:pointer; }
+.footer-links a:hover { color:var(--paige-deep); }
+footer p { color:rgba(255,255,255,0.25); font-size:0.78rem; }
+
+/* ===========================
+   SCROLL ANIMATIONS
+=========================== */
+.reveal { opacity:0; transform:translateY(24px); transition:all 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity:0; transform:translateX(-30px); }
+  to { opacity:1; transform:translateX(0); }
+}
+@keyframes slideDown {
+  from { opacity:0; transform:translateY(-20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ===========================
+   HAMBURGER MENU
+=========================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 0.4rem;
+  background: none;
+  border: none;
+  z-index: 1100;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile nav drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(10,5,20,0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(107,63,160,0.3);
+  z-index: 999;
+  padding: 1rem 0;
+  flex-direction: column;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a, .mobile-nav button {
+  display: block; width: 100%;
+  padding: 0.85rem 1.5rem;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem; font-weight: 500;
+  text-decoration: none; background: none; border: none;
+  text-align: left; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  border-bottom: 1px solid rgba(107,63,160,0.1);
+  transition: all 0.2s;
+}
+body.rtl .mobile-nav a, body.rtl .mobile-nav button { text-align: right; }
+.mobile-nav a:hover, .mobile-nav button:hover {
+  color: white; background: rgba(107,63,160,0.15);
+}
+.mobile-nav .mobile-nav-cta {
+  margin: 0.8rem 1.5rem 0.3rem;
+  border-radius: 50px;
+  background: var(--gradient);
+  color: white !important;
+  text-align: center !important;
+  border: none;
+  border-bottom: none !important;
+  font-weight: 700;
+}
+
+/* ===========================
+   RESPONSIVE — TABLET (1024px)
+=========================== */
+@media(max-width:1024px){
+  .services-grid, .grooming-grid { grid-template-columns: 1fr 1fr; }
+  .delivery-steps { grid-template-columns: 1fr 1fr; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-right { justify-content: center; }
+  .hero-img-wrap { width: 100%; max-width: 460px; height: 360px; margin: 0 auto; }
+  .float-card.fc1 { left: 0.5rem; bottom: 0.5rem; }
+  .float-card.fc2 { right: 0.5rem; top: 0.5rem; }
+  .plans-grid { max-width: 100%; }
+}
+
+/* ===========================
+   RESPONSIVE — MOBILE (768px)
+=========================== */
+@media(max-width:768px){
+  /* Nav */
+  .topnav { padding: 0 1rem; gap: 0.5rem; }
+  .nav-links { display: none; } /* hidden, replaced by drawer */
+  .hamburger { display: flex; }
+  .lang-btn { padding: 0.35rem 0.6rem; font-size: 0.7rem; }
+  .login-btn { padding: 0.4rem 0.9rem; font-size: 0.75rem; }
+  .cart-btn { width: 34px; height: 34px; font-size: 0.9rem; }
+
+  /* Hero */
+  .hero { padding: 88px 1.2rem 2.5rem; min-height: auto; }
+  .hero-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .hero p { font-size: 0.9rem; max-width: 100%; }
+  .hero-btns { gap: 0.7rem; }
+  .btn-primary, .btn-outline { padding: 0.75rem 1.4rem; font-size: 0.85rem; }
+  .hero-img-wrap { width: 100%; max-width: 100%; height: 260px; border-radius: 20px; }
+  .float-card { padding: 0.7rem 1rem; }
+  .float-card .value { font-size: 1.1rem; }
+  .float-card.fc1 { left: 0; bottom: 0.5rem; }
+  .float-card.fc2 { right: 0; top: 0.5rem; }
+
+  /* Hiring banner */
+  .hiring-banner { font-size: 0.78rem; padding: 0.7rem 1rem; }
+
+  /* Pet profiles */
+  .profiles-section { padding: 3rem 1.2rem; }
+  .profiles-row { gap: 1rem; }
+  .profile-ring { width: 74px; height: 74px; }
+  .profile-inner { font-size: 1.6rem; }
+  .add-profile { width: 74px; height: 74px; font-size: 1.3rem; }
+
+  /* Sections */
+  .section { padding: 3rem 1.2rem; }
+  .section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
+  .section-sub { font-size: 0.88rem; margin-bottom: 2rem; }
+
+  /* Grids */
+  .services-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  .grooming-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  .delivery-steps { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .plans-grid { grid-template-columns: 1fr; gap: 1rem; max-width: 100%; }
+
+  /* Cards padding */
+  .svc-card { padding: 1.5rem 1.2rem; }
+  .groom-card { padding: 1.5rem 1.2rem; }
+  .d-step { padding: 1.3rem 1rem; }
+  .plan-card { padding: 1.8rem 1.4rem; }
+
+  /* Lost/Adopt pages */
+  .page-header { padding: 2rem 1.2rem 1.5rem; }
+  .page-header h1 { font-size: 1.8rem; }
+  .big-action-btns { padding: 1.2rem; gap: 0.8rem; }
+  .big-action-btn { padding: 1.3rem 1.8rem; }
+  .big-action-btn .btn-icon { font-size: 1.8rem; }
+  .big-action-btn .btn-label { font-size: 0.88rem; }
+  .insta-feed-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 1.2rem 2rem;
+    gap: 0.8rem;
+  }
+  .bspca-note { margin: 0 1.2rem 1.2rem; padding: 1rem; font-size: 0.8rem; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; padding: 1.5rem 1.2rem; gap: 2rem; }
+  .contact-form-box { padding: 1.8rem 1.2rem; }
+  #page-contact > div > div:first-child { padding: 2.5rem 1.2rem 1.5rem; }
+
+  /* Teams & Jobs */
+  .team-grid { padding: 1.5rem 1.2rem; grid-template-columns: 1fr 1fr; }
+  .jobs-list { padding: 1.5rem 1.2rem; }
+  .job-card { padding: 1.2rem; }
+  .job-card h3 { font-size: 0.9rem; }
+
+  /* Auth pages */
+  #page-signin, #page-signup { padding: 80px 1rem 1.5rem; align-items: flex-start; padding-top: 90px; }
+  .auth-box { padding: 2rem 1.4rem; max-width: 100%; }
+
+  /* Footer */
+  footer { padding: 2rem 1.2rem; }
+  .footer-links { gap: 0.8rem; }
+
+  /* Modal */
+  .modal { padding: 1.8rem 1.3rem; border-radius: 20px; }
+  .modal-form .form-row { grid-template-columns: 1fr; gap: 0; }
+
+  /* About hero */
+  .about-hero { padding: 3rem 1.2rem; }
+  .about-hero h1 { font-size: 1.8rem !important; }
+}
+
+/* ===========================
+   RESPONSIVE — SMALL MOBILE (480px)
+=========================== */
+@media(max-width:480px){
+  .hero h1 { font-size: clamp(1.7rem, 8vw, 2.2rem); }
+  .hero-img-wrap { height: 220px; }
+  .float-card { display: none; } /* hide floaters on very small screens */
+
+  .delivery-steps { grid-template-columns: 1fr; }
+  .insta-feed-grid { grid-template-columns: 1fr; }
+
+  .profiles-row { gap: 0.7rem; }
+  .profile-ring { width: 64px; height: 64px; }
+  .profile-inner { font-size: 1.4rem; }
+  .add-profile { width: 64px; height: 64px; font-size: 1.1rem; }
+  .profile-name { font-size: 0.7rem; }
+
+  .team-grid { grid-template-columns: 1fr; }
+
+  .big-action-btns { flex-direction: column; align-items: center; }
+  .big-action-btn { width: 100%; max-width: 300px; }
+
+  .modal { max-height: 95vh; }
+  .auth-box { border-radius: 20px; }
+
+  .section-label { font-size: 0.65rem; }
+  .hiring-banner { font-size: 0.72rem; }
+  .hiring-banner a { display: block; margin: 0.3rem 0 0; }
+
+  /* Stack plan price nicely */
+  .plan-card .plan-price { font-size: 2.2rem; }
+  
+  .footer-links { gap: 0.6rem; font-size: 0.78rem; }
+}
+
+/* ===========================
+   TOUCH IMPROVEMENTS
+=========================== */
+@media(hover:none) {
+  /* Better tap targets */
+  .nav-links a, .nav-links button { padding: 0.6rem 0.8rem; }
+  .svc-card:hover, .groom-card:hover, .plan-card:hover { transform: none; }
+  .profile-bubble:hover { transform: none; }
+  .insta-card:hover { transform: none; }
+  .team-card:hover { transform: none; }
+  .job-card:hover { transform: none; }
+}
+
+/* Prevent text zoom on iOS inputs */
+@media(max-width:768px){
+  input, select, textarea { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================
+     TOP NAVIGATION
+============================ -->
+<nav class="topnav" id="topnav">
+  <div class="logo-text" onclick="showPage('main')">Nibbly</div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('main')" href="#" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('main'); scrollToSection('services-sec')" href="#" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('about')" href="#" id="nav-about">About Us</a></li>
+    <li><a onclick="showPage('hiring')" href="#" id="nav-hiring">We're Hiring</a></li>
+    <li><a onclick="showPage('lost')" href="#" id="nav-lost">Lost Pet</a></li>
+    <li><a onclick="showPage('adopt')" href="#" id="nav-adopt">Adopt a Pet</a></li>
+    <li><a onclick="showPage('main'); scrollToSection('plans-sec')" href="#" id="nav-plans">Packages</a></li>
+    <li><a onclick="showPage('contact')" href="#" id="nav-contact">Contact Us</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">العربية</button>
+    <button class="cart-btn" title="Cart">🛒<span class="cart-count">0</span></button>
+    <button class="login-btn" onclick="showPage('signin')" id="loginNavBtn">Log In</button>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#" onclick="navTo('main')">🏠 Home</a>
+  <a href="#" onclick="navTo('main','services-sec')">🛒 Services</a>
+  <a href="#" onclick="navTo('about')">ℹ️ About Us</a>
+  <a href="#" onclick="navTo('hiring')">💼 We're Hiring</a>
+  <a href="#" onclick="navTo('lost')">🔍 Lost Pet</a>
+  <a href="#" onclick="navTo('adopt')">🏠 Adopt a Pet</a>
+  <a href="#" onclick="navTo('main','plans-sec')">📦 Packages</a>
+  <a href="#" onclick="navTo('contact')">📞 Contact Us</a>
+  <a href="#" onclick="navTo('signin')" class="mobile-nav-cta">Log In / Sign Up</a>
+</div>
+
+<!-- ============================
+     MAIN PAGE
+============================ -->
+<div class="page active" id="page-main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid max-w">
+      <div class="hero-left">
+        <div class="hero-tag">🐾 <span id="htag">Bahrain's Premium Pet Platform</span></div>
+        <h1 id="htitle">Everything Your Pet <em>Deserves,</em> Delivered.</h1>
+        <p id="hdesc">Premium pet food from top Bahraini pet shops, personalised pet profiles, professional grooming, and lost &amp; adoption services — all in one subscription for just BD 2.75/month.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('signup')" id="hbtn1">Start Free Trial</button>
+          <button class="btn-outline" onclick="scrollToSection('services-sec')" id="hbtn2">Explore Services</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&auto=format&fit=crop" alt="Happy dog" />
+        </div>
+        <div class="float-card fc1">
+          <div class="label" id="fc1l">Subscription from</div>
+          <div class="value price-highlight">BD 2.75<span style="font-size:0.9rem;font-weight:400">/mo</span></div>
+          <div class="sub" id="fc1s">Free delivery included</div>
+        </div>
+        <div class="float-card fc2">
+          <div class="label" id="fc2l">Happy Pets</div>
+          <div class="value">2,400+</div>
+          <div class="sub" id="fc2s">Served across Bahrain</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIRING BANNER -->
+  <div class="hiring-banner">
+    <span id="hbanner">🎉 We're growing! Join the Nibbly team.</span>
+    <a onclick="showPage('hiring')" id="hbanner-link">View Open Roles →</a>
+  </div>
+
+  <!-- NETFLIX-STYLE PET PROFILES -->
+  <section class="profiles-section" id="profiles-sec">
+    <div class="section-label" id="pl">YOUR PETS</div>
+    <h2 class="section-title light" style="margin-bottom:0.5rem" id="ph">Choose a <em>Profile</em></h2>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:2rem;" id="pp">Log in to manage pet profiles. Each pet gets their own personalised food plan.</p>
+    <div class="profiles-row" id="profilesRow">
+      <div class="profile-bubble" onclick="openPetModal()">
+        <div class="profile-ring">
+          <div class="profile-inner">🐕</div>
+        </div>
+        <span class="profile-name">Max</span>
+      </div>
+      <div class="profile-bubble" onclick="openPetModal()">
+        <div class="profile-ring">
+          <div class="profile-inner">🐈</div>
+        </div>
+        <span class="profile-name">Luna</span>
+      </div>
+      <div class="profile-bubble" onclick="openPetModal()">
+        <div class="profile-ring">
+          <div class="profile-inner">🐇</div>
+        </div>
+        <span class="profile-name">Snowball</span>
+      </div>
+      <div class="profile-bubble" onclick="openPetModal()">
+        <div class="add-profile">＋</div>
+        <span class="profile-name" id="apn">Add Pet</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-dark" id="services-sec">
+    <div class="max-w">
+      <div class="section-label" id="svl">WHAT WE OFFER</div>
+      <h2 class="section-title light" id="svh">All-in-One Pet Care <em>Platform</em></h2>
+      <p class="section-sub light" id="svp">From food delivery to grooming, we cover every paw, whisker, and tail.</p>
+      <div class="services-grid">
+        <div class="svc-card highlight reveal">
+          <span class="svc-icon">🛒</span>
+          <h3 id="s1h">Pet Food Delivery</h3>
+          <p id="s1p">Curated dry &amp; wet food from trusted local pet shops, biweekly or custom schedule. Free delivery with subscription. Food priced separately — budget-friendly options always available.</p>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-icon">✂️</span>
+          <h3 id="s2h">Pet Grooming</h3>
+          <p id="s2p">Professional grooming at your home via our mobile truck, or drop off at our grooming hub. Choose from Regular, Deshedding, or Full Grooming packages.</p>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-icon">👤</span>
+          <h3 id="s3h">Smart Pet Profiles</h3>
+          <p id="s3p">Multi-pet support. Custom icons or upload a real photo. Set breed, age, gender, allergies, food preferences, and birthday for automatic gift delivery.</p>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-icon">🎁</span>
+          <h3 id="s4h">Birthday Surprises</h3>
+          <p id="s4p">Set your pet's birthday and receive a curated cake or new toy automatically delivered to your door. A little celebration for your best friend.</p>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-icon">🏠</span>
+          <h3 id="s5h">Lost &amp; Adoption</h3>
+          <p id="s5p">Report a lost pet, find strays, or browse our community adoption board. Integrated BSPCA-style feed so everything is visible in one spot.</p>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-icon">🏪</span>
+          <h3 id="s6h">Pet Shop Marketplace</h3>
+          <p id="s6p">Browse and order from verified local pet shops on demand. Supplements, accessories, toys — available to subscribers and non-subscribers alike.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROOMING PACKAGES -->
+  <section class="section section-mid" id="grooming-sec">
+    <div class="max-w">
+      <div class="section-label" id="gl">GROOMING PACKAGES</div>
+      <h2 class="section-title light" id="gh">Professional Grooming, <em>Your Way</em></h2>
+      <p class="section-sub light" id="gp">Mobile truck to your door or home service — choose the package that fits your pet.</p>
+      <div class="grooming-grid">
+        <div class="groom-card reveal">
+          <span class="groom-icon">🛁</span>
+          <span class="groom-badge" id="gb1">Regular Package</span>
+          <h3 id="gh1">Standard Clean</h3>
+          <ul class="groom-features">
+            <li id="gf1a">Standard Bath &amp; Dry</li>
+            <li id="gf1b">Ear Cleaning</li>
+            <li id="gf1c">Nail Cutting</li>
+            <li id="gf1d">Brush out &amp; finishing spray</li>
+          </ul>
+        </div>
+        <div class="groom-card best reveal">
+          <span class="groom-icon">✨</span>
+          <span class="groom-badge" id="gb2">Deshedding Package</span>
+          <h3 id="gh2">Deep Deshed</h3>
+          <ul class="groom-features">
+            <li id="gf2a">All Regular features</li>
+            <li id="gf2b">Deshedding treatment</li>
+            <li id="gf2c">Undercoat removal</li>
+            <li id="gf2d">Coat condition mask</li>
+          </ul>
+        </div>
+        <div class="groom-card reveal">
+          <span class="groom-icon">💇</span>
+          <span class="groom-badge" id="gb3">Full Grooming</span>
+          <h3 id="gh3">Luxury Styling</h3>
+          <ul class="groom-features">
+            <li id="gf3a">Full Shave or Trim</li>
+            <li id="gf3b">Face &amp; paw trimming</li>
+            <li id="gf3c">Hair styling &amp; finishing</li>
+            <li id="gf3d">All Deshedding features</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD DELIVERY HOW IT WORKS -->
+  <section class="section section-dark" id="delivery-sec">
+    <div class="max-w">
+      <div class="section-label" id="dl">HOW DELIVERY WORKS</div>
+      <h2 class="section-title light" id="dh">Food Delivered on <em>Your Schedule</em></h2>
+      <p class="section-sub light" id="dp">Biweekly by default, or pick your own dates and times. Food sourced from local pet shops — dry, wet, premium and budget options — all meeting full nutritional requirements.</p>
+      <div class="delivery-steps">
+        <div class="d-step reveal" data-n="1">
+          <span class="d-icon">📋</span>
+          <h4 id="ds1h">Create Pet Profile</h4>
+          <p id="ds1p">Tell us about your pet — species, breed, weight, allergies, and favourite foods.</p>
+        </div>
+        <div class="d-step reveal" data-n="2">
+          <span class="d-icon">🗓️</span>
+          <h4 id="ds2h">Pick Your Schedule</h4>
+          <p id="ds2p">Biweekly auto-delivery or fully customise dates and times that suit you.</p>
+        </div>
+        <div class="d-step reveal" data-n="3">
+          <span class="d-icon">🛍️</span>
+          <h4 id="ds3h">We Source It</h4>
+          <p id="ds3p">We pick nutritionally balanced food from trusted local shops — dry, wet, or both.</p>
+        </div>
+        <div class="d-step reveal" data-n="4">
+          <span class="d-icon">🚚</span>
+          <h4 id="ds4h">Doorstep Delivery</h4>
+          <p id="ds4p">Free delivery with your subscription. Non-subscribers can order manually anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIPTION PLANS -->
+  <section class="section section-mid" id="plans-sec">
+    <div class="max-w">
+      <div class="section-label centered" id="pll">SUBSCRIPTION PLANS</div>
+      <h2 class="section-title light centered" id="plh">Simple, <em>Transparent</em> Pricing</h2>
+      <p class="section-sub light centered" id="plp">Cancel or switch anytime. Free delivery included with all plans. Food costs are separate.</p>
+      <div class="plans-grid">
+        <div class="plan-card reveal">
+          <h3 id="pn1">Basic Paw</h3>
+          <p id="ps1">Single pet household</p>
+          <div class="plan-price"><sup>BD</sup>2.75<span>/mo</span></div>
+          <ul class="plan-features">
+            <li id="pf1a">1 Pet Profile</li>
+            <li id="pf1b">Biweekly food delivery (free)</li>
+            <li id="pf1c">Pet shop marketplace access</li>
+            <li id="pf1d">Lost &amp; found board</li>
+            <li id="pf1e">Birthday reminder &amp; surprise</li>
+          </ul>
+          <button class="plan-btn" onclick="showPage('signup')" id="pbtn1">Get Started</button>
+        </div>
+        <div class="plan-card popular reveal">
+          <div class="popular-tag" id="popt">Most Popular</div>
+          <h3 id="pn2">Family Pack</h3>
+          <p id="ps2">For multi-pet households</p>
+          <div class="plan-price"><sup>BD</sup>2.75<span>/mo</span></div>
+          <ul class="plan-features">
+            <li id="pf2a">Up to 4 Pet Profiles</li>
+            <li id="pf2b">Custom delivery schedule (free)</li>
+            <li id="pf2c">Full marketplace access</li>
+            <li id="pf2d">1 Monthly grooming visit</li>
+            <li id="pf2e">Birthday surprises (cake or toy)</li>
+            <li id="pf2f">Priority customer support</li>
+          </ul>
+          <button class="plan-btn" onclick="showPage('signup')" id="pbtn2">Get Started</button>
+        </div>
+      </div>
+      <p class="no-sub-note" id="nsnote">Not subscribed? You can still <a href="#" onclick="showPage('main')" style="color:var(--blue-light)">browse and order food manually</a> from our marketplace — no pet profiles, no scheduled delivery, just on-demand ordering.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Nibbly</div>
+    <div class="footer-links">
+      <a onclick="showPage('main')">Home</a>
+      <a onclick="showPage('about')">About Us</a>
+      <a onclick="showPage('hiring')">We're Hiring</a>
+      <a onclick="showPage('lost')">Lost Pet</a>
+      <a onclick="showPage('adopt')">Adopt</a>
+      <a onclick="scrollToSection('plans-sec')">Pricing</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <p>© 2026 Nibbly. Built with 🐾 for pet lovers in Bahrain. | Computing 2 Project</p>
+  </footer>
+</div>
+
+<!-- ============================
+     LOST PET PAGE
+============================ -->
+<div class="page" id="page-lost">
+  <div class="page-header">
+    <div class="section-label">COMMUNITY BOARD</div>
+    <h1>Lost Pets</h1>
+    <p>Find missing pets, report strays, and reunite families. All in one place.</p>
+  </div>
+
+  <div class="big-action-btns">
+    <button class="big-action-btn" onclick="openReportModal()">
+      <span class="btn-icon">📢</span>
+      <span class="btn-label">Report a Lost Pet</span>
+      <span class="btn-sub">Post details + contact info</span>
+    </button>
+    <button class="big-action-btn outline" onclick="showPage('adopt')">
+      <span class="btn-icon">🏠</span>
+      <span class="btn-label">Adopt a Pet</span>
+      <span class="btn-sub">Give a stray a loving home</span>
+    </button>
+  </div>
+
+  <div class="bspca-note">
+    <span>📱</span>
+    <span>Live feed powered by community reports and the <a href="#">BSPCA Bahrain</a>. See real posts, real areas, real contact info — updated regularly.</span>
+  </div>
+
+  <div class="insta-feed-grid">
+    <div class="insta-card">
+      <div class="insta-img">🐕</div>
+      <div class="insta-info">
+        <h4>Golden Retriever — Buddy</h4>
+        <div class="area">📍 Riffa, Block 904</div>
+        <div class="contact">📞 +973 3311 XXXX</div>
+        <span class="status-badge status-lost">⚠️ Lost</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐈</div>
+      <div class="insta-info">
+        <h4>Grey Tabby Cat — Rami</h4>
+        <div class="area">📍 Isa Town</div>
+        <div class="contact">📞 +973 3422 XXXX</div>
+        <span class="status-badge status-lost">⚠️ Lost</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐩</div>
+      <div class="insta-info">
+        <h4>White Poodle Found</h4>
+        <div class="area">📍 Manama, near Gulf Hotel</div>
+        <div class="contact">📞 +973 3500 XXXX</div>
+        <span class="status-badge status-found">✅ Found</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐦</div>
+      <div class="insta-info">
+        <h4>Green Parrot — Kiwi</h4>
+        <div class="area">📍 Hamad Town</div>
+        <div class="contact">📞 +973 3688 XXXX</div>
+        <span class="status-badge status-lost">⚠️ Lost</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐕‍🦺</div>
+      <div class="insta-info">
+        <h4>Stray Dog — Needs Home</h4>
+        <div class="area">📍 Sitra Industrial Area</div>
+        <div class="contact">Contact BSPCA</div>
+        <span class="status-badge status-adopt">🏠 For Adoption</span>
+      </div>
+    </div>
+    <div class="insta-card" style="cursor:pointer" onclick="openReportModal()">
+      <div class="insta-img" style="font-size:2rem;flex-direction:column;gap:0.5rem;">
+        <span>➕</span>
+        <span style="font-size:0.85rem;color:rgba(255,255,255,0.5)">Add Report</span>
+      </div>
+      <div class="insta-info">
+        <h4>Post a Missing Pet</h4>
+        <div class="contact">Help reunite pets with their families</div>
+      </div>
+    </div>
+  </div>
+  <footer style="margin-top:2rem">
+    <div class="footer-links">
+      <a onclick="showPage('main')">Home</a>
+      <a onclick="showPage('adopt')">Adopt</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <p>© 2026 Nibbly</p>
+  </footer>
+</div>
+
+<!-- ============================
+     ADOPTION PAGE
+============================ -->
+<div class="page" id="page-adopt">
+  <div class="page-header">
+    <div class="section-label">COMMUNITY BOARD</div>
+    <h1>Adopt a Pet</h1>
+    <p>Give a stray animal a loving forever home. Browse our adoption listings below.</p>
+  </div>
+
+  <div class="big-action-btns">
+    <button class="big-action-btn" onclick="showPage('lost')">
+      <span class="btn-icon">📢</span>
+      <span class="btn-label">Report a Lost Pet</span>
+      <span class="btn-sub">Is your pet missing?</span>
+    </button>
+    <button class="big-action-btn outline" onclick="openReportModal()">
+      <span class="btn-icon">🐾</span>
+      <span class="btn-label">List a Pet for Adoption</span>
+      <span class="btn-sub">Found a stray? Post here</span>
+    </button>
+  </div>
+
+  <div class="bspca-note">
+    <span>🌐</span>
+    <span>Adoption listings are community sourced. For official adoptions, visit <a href="#">BSPCA Bahrain</a> or contact us. All animals deserve a loving home.</span>
+  </div>
+
+  <div class="insta-feed-grid">
+    <div class="insta-card">
+      <div class="insta-img">🐕</div>
+      <div class="insta-info">
+        <h4>Buddy — Labrador Mix</h4>
+        <div class="area">Male · 2 years · Vaccinated</div>
+        <div class="contact">Very friendly and playful</div>
+        <span class="status-badge status-adopt">🏠 Available</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐈</div>
+      <div class="insta-info">
+        <h4>Mimi — Persian Mix</h4>
+        <div class="area">Female · 8 months · Spayed</div>
+        <div class="contact">Gentle and calm indoors</div>
+        <span class="status-badge status-adopt">🏠 Available</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐇</div>
+      <div class="insta-info">
+        <h4>Snowball — White Rabbit</h4>
+        <div class="area">Female · 1 year</div>
+        <div class="contact">Great with children</div>
+        <span class="status-badge status-adopt">🏠 Available</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐈‍⬛</div>
+      <div class="insta-info">
+        <h4>Shadow — Black Cat</h4>
+        <div class="area">Male · 3 years · Neutered</div>
+        <div class="contact">Loves cuddles</div>
+        <span class="status-badge status-adopt">🏠 Available</span>
+      </div>
+    </div>
+    <div class="insta-card">
+      <div class="insta-img">🐹</div>
+      <div class="insta-info">
+        <h4>Peanut — Hamster</h4>
+        <div class="area">Unknown sex · ~6 months</div>
+        <div class="contact">Active and curious</div>
+        <span class="status-badge status-adopt">🏠 Available</span>
+      </div>
+    </div>
+    <div class="insta-card" style="cursor:pointer" onclick="openReportModal()">
+      <div class="insta-img" style="font-size:2rem;flex-direction:column;gap:0.5rem;">
+        <span>➕</span>
+        <span style="font-size:0.85rem;color:rgba(255,255,255,0.5)">List a Pet</span>
+      </div>
+      <div class="insta-info">
+        <h4>Post for Adoption</h4>
+        <div class="contact">Found a stray? Help them find a home</div>
+      </div>
+    </div>
+  </div>
+  <footer style="margin-top:2rem">
+    <div class="footer-links">
+      <a onclick="showPage('main')">Home</a>
+      <a onclick="showPage('lost')">Lost Pets</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <p>© 2026 Nibbly</p>
+  </footer>
+</div>
+
+<!-- ============================
+     ABOUT US PAGE
+============================ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="section-label">OUR STORY</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;font-size:2.5rem;margin-bottom:1rem;">About <em style="font-style:italic;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Nibbly</em></h1>
+    <p style="color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto;line-height:1.8;">Nibbly was founded in Bahrain by pet lovers who wanted to make quality pet care effortless. We believe every pet deserves the best — nutritious food, proper grooming, and a safe community to find and be found in.</p>
+  </div>
+
+  <section style="padding:3rem;background:var(--dark2);text-align:center;">
+    <div class="section-label">OUR MISSION</div>
+    <h2 class="section-title light" style="max-width:600px;margin:0 auto 1rem;">Connecting Pets, Owners &amp; Community</h2>
+    <p style="color:rgba(255,255,255,0.55);max-width:650px;margin:0 auto;line-height:1.8;">We partner with local Bahraini pet shops to bring you the best products at fair prices. We employ groomers, delivery drivers, and customer care professionals who genuinely love animals. Our platform is a Computing 2 project with a real-world vision.</p>
+  </section>
+
+  <section style="padding:1rem 0 3rem;background:var(--dark2);">
+    <h2 class="section-title light centered" style="padding:0 2rem 1rem;">The <em>Team</em> Behind Nibbly</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">📞</div>
+        <h4>Customer Service</h4>
+        <span>Your first point of contact — here to help 7 days a week</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🚚</div>
+        <h4>Delivery Drivers</h4>
+        <span>On-time, careful delivery of every order across Bahrain</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">✂️</div>
+        <h4>Groomers</h4>
+        <span>Certified pet groomers with a passion for animal care</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">📊</div>
+        <h4>Accounts Manager</h4>
+        <span>Overseeing finances, partnerships and shop relations</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">📣</div>
+        <h4>Marketing</h4>
+        <span>Spreading the Nibbly mission across Bahrain and beyond</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🤝</div>
+        <h4>Human Resources</h4>
+        <span>Building the best team for Bahrain's best pet platform</span>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-logo">Nibbly</div>
+    <div class="footer-links">
+      <a onclick="showPage('main')">Home</a>
+      <a onclick="showPage('hiring')">Join Our Team</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <p>© 2026 Nibbly</p>
+  </footer>
+</div>
+
+<!-- ============================
+     WE'RE HIRING PAGE
+============================ -->
+<div class="page" id="page-hiring">
+  <div class="page-header">
+    <div class="section-label">JOIN THE TEAM</div>
+    <h1>We're Hiring! 🎉</h1>
+    <p>Help us build Bahrain's best pet platform. We're a passionate, animal-loving team looking for talented people.</p>
+  </div>
+  <div class="jobs-list">
+    <div class="job-card">
+      <div class="job-info"><h3>Customer Service Representative</h3><span>📞 Respond to queries, handle complaints, support users</span></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+        <span class="job-type">Full-Time</span>
+        <button class="apply-btn" onclick="showPage('contact')">Apply</button>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-info"><h3>Delivery Driver</h3><span>🚚 On-time pet food delivery across Bahrain</span></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+        <span class="job-type">Part-Time / Full-Time</span>
+        <button class="apply-btn" onclick="showPage('contact')">Apply</button>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-info"><h3>Certified Pet Groomer</h3><span>✂️ Mobile truck grooming &amp; home visits</span></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+        <span class="job-type">Full-Time</span>
+        <button class="apply-btn" onclick="showPage('contact')">Apply</button>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-info"><h3>Accounts Manager</h3><span>📊 Manage shop partnerships, invoicing, and financials</span></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+        <span class="job-type">Full-Time</span>
+        <button class="apply-btn" onclick="showPage('contact')">Apply</button>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-info"><h3>Marketing Executive</h3><span>📣 Social media, campaigns, growth strategy</span></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+        <span class="job-type">Full-Time</span>
+        <button class="apply-btn" onclick="showPage('contact')">Apply</button>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-info"><h3>HR Coordinator</h3><span>🤝 Recruitment, onboarding, culture &amp; wellbeing</span></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+        <span class="job-type">Full-Time</span>
+        <button class="apply-btn" onclick="showPage('contact')">Apply</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">Nibbly</div>
+    <div class="footer-links">
+      <a onclick="showPage('main')">Home</a>
+      <a onclick="showPage('about')">About Us</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <p>© 2026 Nibbly</p>
+  </footer>
+</div>
+
+<!-- ============================
+     CONTACT PAGE
+============================ -->
+<div class="page" id="page-contact">
+  <div style="padding-top:64px;">
+    <div style="padding:4rem 3rem 2rem;text-align:center;background:var(--paige-mid);">
+      <div class="section-label" style="color:var(--purple);">GET IN TOUCH</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--dark);margin-bottom:0.5rem;">We'd Love to <em style="font-style:italic;color:var(--purple);">Hear From You</em></h1>
+      <p style="color:var(--text-muted);max-width:450px;margin:0 auto;">Questions? Feedback? Job applications? Reach out and we'll get back to you within a few hours.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form-box">
+        <h3 style="font-family:'Playfair Display',serif;color:var(--dark);font-size:1.3rem;margin-bottom:1.5rem;">Send a Message</h3>
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="e.g. Sara Al Khalifa" /></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="you@example.com" /></div>
+        <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+973 3xxx xxxx" /></div>
+        <div class="form-group"><label>Subject</label><select><option>General Inquiry</option><option>Food Delivery</option><option>Pet Grooming</option><option>Job Application</option><option>Report a Bug</option><option>Other</option></select></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us how we can help…"></textarea></div>
+        <button class="btn-primary" style="width:100%;padding:0.9rem;font-size:1rem;">Send Message 🐾</button>
+      </div>
+      <div class="contact-info">
+        <h3 style="font-family:'Playfair Display',serif;color:var(--dark);font-size:1.3rem;margin-bottom:1.5rem;">Contact Details</h3>
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div class="ci-text"><h4>Location</h4><p>Manama, Kingdom of Bahrain</p></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div class="ci-text"><h4>Phone / WhatsApp</h4><p>+973 3XXX XXXX<br>Available 9am–9pm daily</p></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📧</div>
+          <div class="ci-text"><h4>Email</h4><p>hello@nibbly.bh<br>We reply within 24 hours</p></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📱</div>
+          <div class="ci-text"><h4>Social Media</h4><p>@nibbly.bh on Instagram &amp; TikTok</p></div>
+        </div>
+        <div style="margin-top:2rem;padding:1.5rem;background:var(--paige-mid);border-radius:18px;">
+          <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">🎓 <strong>Computing 2 Project</strong> — Nibbly is a university project built to demonstrate a full-stack pet service platform concept for Bahrain.</p>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-logo" style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Nibbly</div>
+      <div class="footer-links" style="margin-bottom:1rem;">
+        <a onclick="showPage('main')">Home</a>
+        <a onclick="showPage('about')">About</a>
+        <a onclick="showPage('hiring')">Careers</a>
+      </div>
+      <p>© 2026 Nibbly. Computing 2 Project.</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ============================
+     SIGN IN PAGE
+============================ -->
+<div class="page" id="page-signin">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div>Nibbly</div>
+      <p>Sign in to manage your pets</p>
+    </div>
+    <h2>Welcome Back</h2>
+    <p class="auth-sub">Log in to access your pet profiles and orders</p>
+    <div class="auth-form">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" />
+      </div>
+      <button class="auth-submit" onclick="showPage('main')">Log In</button>
+    </div>
+    <div class="auth-divider">or</div>
+    <p class="auth-switch">Don't have an account? <a onclick="showPage('signup')">Sign Up</a></p>
+    <p style="text-align:center;margin-top:0.8rem;font-size:0.78rem;color:rgba(255,255,255,0.3)"><a href="#" style="color:rgba(255,255,255,0.35)">Forgot password?</a></p>
+  </div>
+</div>
+
+<!-- ============================
+     SIGN UP PAGE
+============================ -->
+<div class="page" id="page-signup">
+  <div class="auth-box" style="max-width:480px;">
+    <div class="auth-logo">
+      <div>Nibbly</div>
+      <p>Create your free account</p>
+    </div>
+    <h2>Get Started</h2>
+    <p class="auth-sub">Join thousands of pet owners in Bahrain</p>
+    <div class="auth-form">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" placeholder="+973 3xxx xxxx" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create a strong password" />
+      </div>
+      <div class="form-group">
+        <label>Preferred Language</label>
+        <select>
+          <option>English</option>
+          <option>العربية</option>
+        </select>
+      </div>
+      <button class="auth-submit" onclick="showPage('main')">Create Account &amp; Start Free Trial</button>
+    </div>
+    <p class="auth-switch">Already have an account? <a onclick="showPage('signin')">Log In</a></p>
+  </div>
+</div>
+
+<!-- ============================
+     PET PROFILE MODAL
+============================ -->
+<div class="modal-overlay" id="petModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePetModal()">✕</button>
+    <h2>Add a Pet Profile</h2>
+    <p class="modal-sub">Tell us about your furry friend so we can personalise their food plan.</p>
+
+    <div class="section-label" style="margin-bottom:0.6rem;font-size:0.7rem;">CHOOSE AN ICON FOR YOUR PET</div>
+    <div class="icon-picker">
+      <div class="icon-opt selected" onclick="selectIcon(this)">🐕</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐈</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐇</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐦</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐠</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐹</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐢</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🦜</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐴</div>
+      <div class="icon-opt" onclick="selectIcon(this)">🐓</div>
+    </div>
+    <div class="section-label" style="margin:0.8rem 0 0.4rem;font-size:0.7rem;">OR UPLOAD A PHOTO</div>
+    <label class="upload-photo-btn">
+      <span>📷</span> Upload a photo of your pet
+      <input type="file" accept="image/*" style="display:none" onchange="previewPetPhoto(event)" />
+    </label>
+    <div id="petPhotoPreview" style="margin-top:0.8rem;display:none;">
+      <img id="petPhotoImg" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--purple);" />
+    </div>
+
+    <div class="modal-form" style="margin-top:1.5rem;">
+      <div class="form-group">
+        <label>Pet's Name</label>
+        <input type="text" placeholder="e.g. Max" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Type of Pet</label>
+          <select>
+            <option>Dog</option><option>Cat</option><option>Bird</option><option>Horse</option><option>Rabbit</option><option>Fish</option><option>Hamster</option><option>Reptile</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Breed</label>
+          <input type="text" placeholder="e.g. Golden Retriever" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" placeholder="e.g. 12" />
+        </div>
+        <div class="form-group">
+          <label>Age</label>
+          <input type="text" placeholder="e.g. 3 years" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Gender</label>
+          <select><option>Male</option><option>Female</option></select>
+        </div>
+        <div class="form-group">
+          <label>Birthday</label>
+          <input type="date" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Foods They Enjoy Most</label>
+        <input type="text" placeholder="e.g. chicken-based dry food, salmon" />
+      </div>
+      <div class="form-group">
+        <label>Foods They Dislike</label>
+        <input type="text" placeholder="e.g. beef, grain-heavy foods" />
+      </div>
+      <div class="form-group">
+        <label>Known Allergens</label>
+        <input type="text" placeholder="e.g. gluten, dairy, chicken protein" />
+      </div>
+      <div class="form-group">
+        <label>Anything Else We Should Know?</label>
+        <textarea placeholder="e.g. sensitive stomach, prefers wet food, currently on medication…" style="min-height:80px;"></textarea>
+      </div>
+      <button class="btn-primary modal-save" onclick="savePetProfile()">Save Pet Profile 🐾</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     REPORT LOST PET MODAL
+============================ -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeReportModal()">✕</button>
+    <h2>Report a Pet</h2>
+    <p class="modal-sub">Fill in as many details as possible to help reunite pets with their owners.</p>
+    <div class="modal-form">
+      <div class="form-group">
+        <label>Report Type</label>
+        <select><option>Lost Pet — I'm looking for my pet</option><option>Found Pet — I found a stray</option><option>Pet for Adoption</option></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Pet Type</label>
+          <select><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Other</option></select>
+        </div>
+        <div class="form-group">
+          <label>Pet Name (if known)</label>
+          <input type="text" placeholder="e.g. Buddy" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea placeholder="Colour, size, markings, collar, microchip…" style="min-height:80px;"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Area / Location</label>
+        <input type="text" placeholder="e.g. Riffa, Block 904" />
+      </div>
+      <div class="form-group">
+        <label>Your Contact (phone / WhatsApp)</label>
+        <input type="tel" placeholder="+973 3xxx xxxx" />
+      </div>
+      <div class="form-group">
+        <label>Upload Photo</label>
+        <input type="file" accept="image/*" style="background:rgba(255,255,255,0.06);border-color:rgba(107,63,160,0.2);color:rgba(255,255,255,0.6);" />
+      </div>
+      <button class="btn-primary modal-save" onclick="closeReportModal()">Submit Report 📢</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     JAVASCRIPT
+============================ -->
+<script>
+// ---- MOBILE NAV ----
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburgerBtn');
+  const isOpen = nav.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navTo(page, section) {
+  closeMobileNav();
+  showPage(page);
+  if(section) scrollToSection(section);
+  return false;
+}
+
+// Close mobile nav on outside click
+document.addEventListener('click', e => {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburgerBtn');
+  if(nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+    closeMobileNav();
+  }
+});
+
+// ---- PAGE NAVIGATION ----
+function showPage(name) {
+  closeMobileNav();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + name);
+  if(target) {
+    target.classList.add('active');
+    window.scrollTo(0,0);
+  }
+  // Auth pages hide nav links
+  const authPages = ['signin','signup'];
+  document.getElementById('navLinks').style.display = authPages.includes(name) ? 'none' : '';
+  return false;
+}
+
+function scrollToSection(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 50);
+}
+
+// ---- LANGUAGE TOGGLE ----
+const translations = {
+  en: {
+    langBtn: 'العربية',
+    htag: "Bahrain's Premium Pet Platform",
+    htitle: 'Everything Your Pet <em>Deserves,</em> Delivered.',
+    hdesc: 'Premium pet food from top Bahraini pet shops, personalised pet profiles, professional grooming, and lost & adoption services — all in one subscription for just BD 2.75/month.',
+    hbtn1: 'Start Free Trial', hbtn2: 'Explore Services',
+    hbanner: "🎉 We're growing! Join the Nibbly team.",
+    'hbanner-link': 'View Open Roles →',
+    fc1l:'Subscription from', fc1s:'Free delivery included',
+    fc2l:'Happy Pets', fc2s:'Served across Bahrain',
+    pl:'YOUR PETS', ph:'Choose a <em>Profile</em>',
+    pp:'Log in to manage pet profiles. Each pet gets their own personalised food plan.',
+    apn:'Add Pet',
+    svl:'WHAT WE OFFER', svh:'All-in-One Pet Care <em>Platform</em>',
+    svp:'From food delivery to grooming, we cover every paw, whisker, and tail.',
+    s1h:'Pet Food Delivery', s1p:'Curated dry & wet food from trusted local pet shops, biweekly or custom schedule. Free delivery with subscription.',
+    s2h:'Pet Grooming', s2p:'Professional grooming at your home via our mobile truck. Choose from Regular, Deshedding, or Full Grooming packages.',
+    s3h:'Smart Pet Profiles', s3p:'Multi-pet support. Custom icons or upload a real photo. Set breed, age, allergies, food preferences, and birthday.',
+    s4h:'Birthday Surprises', s4p:'Set your pet\'s birthday and receive a curated cake or new toy automatically delivered to your door.',
+    s5h:'Lost & Adoption', s5p:'Report a lost pet, find strays, or browse our community adoption board.',
+    s6h:'Pet Shop Marketplace', s6p:'Browse and order from verified local pet shops on demand.',
+    gl:'GROOMING PACKAGES', gh:'Professional Grooming, <em>Your Way</em>',
+    gp:'Mobile truck to your door or home service — choose the package that fits your pet.',
+    gb1:'Regular Package', gh1:'Standard Clean',
+    gf1a:'Standard Bath & Dry', gf1b:'Ear Cleaning', gf1c:'Nail Cutting', gf1d:'Brush out & finishing spray',
+    gb2:'Deshedding Package', gh2:'Deep Deshed',
+    gf2a:'All Regular features', gf2b:'Deshedding treatment', gf2c:'Undercoat removal', gf2d:'Coat condition mask',
+    gb3:'Full Grooming', gh3:'Luxury Styling',
+    gf3a:'Full Shave or Trim', gf3b:'Face & paw trimming', gf3c:'Hair styling & finishing', gf3d:'All Deshedding features',
+    dl:'HOW DELIVERY WORKS', dh:'Food Delivered on <em>Your Schedule</em>',
+    dp:'Biweekly by default, or pick your own dates and times. Dry, wet, premium and budget options.',
+    ds1h:'Create Pet Profile', ds1p:'Tell us about your pet — species, breed, weight, allergies, and favourite foods.',
+    ds2h:'Pick Your Schedule', ds2p:'Biweekly auto-delivery or fully customise dates and times.',
+    ds3h:'We Source It', ds3p:'We pick nutritionally balanced food from trusted local shops.',
+    ds4h:'Doorstep Delivery', ds4p:'Free delivery with your subscription.',
+    pll:'SUBSCRIPTION PLANS', plh:'Simple, <em>Transparent</em> Pricing',
+    plp:'Cancel or switch anytime. Free delivery included. Food costs separate.',
+    pn1:'Basic Paw', ps1:'Single pet household',
+    pf1a:'1 Pet Profile', pf1b:'Biweekly food delivery (free)', pf1c:'Pet shop marketplace access', pf1d:'Lost & found board', pf1e:'Birthday reminder & surprise',
+    pbtn1:'Get Started',
+    popt:'Most Popular', pn2:'Family Pack', ps2:'For multi-pet households',
+    pf2a:'Up to 4 Pet Profiles', pf2b:'Custom delivery schedule (free)', pf2c:'Full marketplace access', pf2d:'1 Monthly grooming visit', pf2e:'Birthday surprises', pf2f:'Priority support',
+    pbtn2:'Get Started',
+    nsnote:'Not subscribed? You can still browse and order food manually — no pet profiles, no scheduled delivery.',
+    loginNavBtn:'Log In'
+  },
+  ar: {
+    langBtn: 'English',
+    htag: 'منصة الحيوانات الأليفة الأولى في البحرين',
+    htitle: 'كل ما <em>يستحقه</em> حيوانك الأليف، يُوصّل إليك.',
+    hdesc: 'طعام حيوانات أليفة مميز من أفضل المحلات في البحرين، ملفات شخصية مخصصة، خدمات تزيين احترافية — كل ذلك في اشتراك واحد بسعر 2.75 د.ب شهرياً.',
+    hbtn1: 'ابدأ التجربة المجانية', hbtn2: 'استكشف الخدمات',
+    hbanner: '🎉 نحن نتوسع! انضم إلى فريق Nibbly.',
+    'hbanner-link': 'عرض الوظائف المتاحة ←',
+    fc1l:'الاشتراك يبدأ من', fc1s:'التوصيل مجاني مع الاشتراك',
+    fc2l:'حيوانات أليفة سعيدة', fc2s:'في جميع أنحاء البحرين',
+    pl:'حيوانات أليفتك', ph:'اختر <em>الملف الشخصي</em>',
+    pp:'سجّل الدخول لإدارة ملفات حيواناتك الأليفة.',
+    apn:'إضافة حيوان أليف',
+    svl:'ما نقدمه', svh:'منصة شاملة <em>لرعاية حيوانك الأليف</em>',
+    svp:'من توصيل الطعام إلى التزيين، نهتم بكل مخلب وذيل.',
+    s1h:'توصيل طعام الحيوانات', s1p:'طعام جاف ورطب من محلات موثوقة، توصيل كل أسبوعين أو بجدول مخصص.',
+    s2h:'خدمات التزيين', s2p:'تزيين احترافي في منزلك عبر شاحنتنا المتنقلة.',
+    s3h:'ملفات شخصية ذكية', s3p:'دعم متعدد الحيوانات مع أيقونات مخصصة أو صور حقيقية.',
+    s4h:'مفاجآت عيد الميلاد', s4p:'حدد عيد ميلاد حيوانك واستلم كعكة أو لعبة جديدة تلقائياً.',
+    s5h:'الحيوانات المفقودة والتبني', s5p:'أبلغ عن حيوان مفقود أو تصفح قائمة التبني.',
+    s6h:'سوق محلات الحيوانات', s6p:'اطلب من محلات موثوقة في البحرين عند الطلب.',
+    gl:'باقات التزيين', gh:'تزيين احترافي <em>بأسلوبك</em>',
+    gp:'شاحنة متنقلة إلى بابك أو خدمة في المنزل.',
+    gb1:'الباقة العادية', gh1:'تنظيف قياسي',
+    gf1a:'حمام وتجفيف', gf1b:'تنظيف الأذنين', gf1c:'قص الأظافر', gf1d:'تمشيط وبخاخ التشطيب',
+    gb2:'باقة إزالة الشعر', gh2:'إزالة عميقة',
+    gf2a:'جميع مميزات العادية', gf2b:'علاج إزالة الشعر', gf2c:'إزالة الطبقة السفلية', gf2d:'قناع تغذية الشعر',
+    gb3:'تزيين كامل', gh3:'تصفيف فاخر',
+    gf3a:'حلاقة أو قص كامل', gf3b:'تهذيب الوجه والأكواع', gf3c:'تصفيف الشعر', gf3d:'جميع مميزات إزالة الشعر',
+    dl:'كيف يعمل التوصيل', dh:'الطعام يصلك <em>في موعدك</em>',
+    dp:'كل أسبوعين بشكل افتراضي، أو اختر مواعيدك. جاف ورطب، فاخر واقتصادي.',
+    ds1h:'أنشئ ملف الحيوان', ds1p:'أخبرنا عن حيوانك — النوع، السلالة، الوزن، الحساسية.',
+    ds2h:'اختر جدولك', ds2p:'توصيل تلقائي كل أسبوعين أو جدول مخصص.',
+    ds3h:'نحن نوفره', ds3p:'نختار طعاماً متوازناً من محلات موثوقة.',
+    ds4h:'توصيل على الباب', ds4p:'التوصيل مجاني مع الاشتراك.',
+    pll:'خطط الاشتراك', plh:'أسعار <em>شفافة وبسيطة</em>',
+    plp:'ألغِ أو غيّر خطتك في أي وقت. التوصيل مجاني. تكلفة الطعام منفصلة.',
+    pn1:'الخطة الأساسية', ps1:'لأصحاب حيوان واحد',
+    pf1a:'ملف حيوان واحد', pf1b:'توصيل كل أسبوعين (مجاني)', pf1c:'الوصول إلى السوق', pf1d:'لوحة المفقودات', pf1e:'تذكير وهدية عيد الميلاد',
+    pbtn1:'ابدأ الآن',
+    popt:'الأكثر شعبية', pn2:'الباقة العائلية', ps2:'لأصحاب حيوانات متعددة',
+    pf2a:'حتى 4 ملفات حيوانات', pf2b:'جدول توصيل مخصص (مجاني)', pf2c:'الوصول الكامل للسوق', pf2d:'جلسة تزيين شهرية', pf2e:'مفاجآت عيد الميلاد', pf2f:'دعم أولوي',
+    pbtn2:'ابدأ الآن',
+    nsnote:'غير مشترك؟ يمكنك طلب الطعام يدوياً بدون ملفات شخصية أو جدول.',
+    loginNavBtn:'تسجيل الدخول'
+  }
+};
+
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  const t = translations[currentLang];
+  document.body.classList.toggle('rtl', currentLang === 'ar');
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  for(const [key, val] of Object.entries(t)) {
+    const el = document.getElementById(key);
+    if(el) el.innerHTML = val;
+  }
+}
+
+// ---- PET PROFILE MODAL ----
+function openPetModal() {
+  document.getElementById('petModal').classList.add('open');
+}
+function closePetModal() {
+  document.getElementById('petModal').classList.remove('open');
+}
+function selectIcon(el) {
+  document.querySelectorAll('.icon-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function previewPetPhoto(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('petPhotoImg').src = ev.target.result;
+    document.getElementById('petPhotoPreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+function savePetProfile() {
+  closePetModal();
+  // In real app, save data; here just show feedback
+  const row = document.getElementById('profilesRow');
+  const bubble = document.createElement('div');
+  bubble.className = 'profile-bubble';
+  bubble.innerHTML = `<div class="profile-ring"><div class="profile-inner">🐾</div></div><span class="profile-name">New Pet</span>`;
+  row.insertBefore(bubble, row.lastElementChild);
+}
+
+// ---- REPORT MODAL ----
+function openReportModal() {
+  document.getElementById('reportModal').classList.add('open');
+}
+function closeReportModal() {
+  document.getElementById('reportModal').classList.remove('open');
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if(e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// ---- SCROLL REVEAL ----
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ---- CART ----
+let cartCount = 0;
+document.querySelector('.cart-btn').addEventListener('click', () => {
+  cartCount++;
+  document.querySelector('.cart-count').textContent = cartCount;
+});
+</script>
+</body>
+</html>
